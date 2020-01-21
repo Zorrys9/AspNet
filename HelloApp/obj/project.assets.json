@@ -15,11 +15,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\sasch\\source\\repos\\HelloApp\\HelloApp\\HelloApp.csproj",
+      "projectUniqueName": "C:\\Users\\sasch\\source\\repos\\aspNet\\HelloApp\\HelloApp.csproj",
       "projectName": "HelloApp",
-      "projectPath": "C:\\Users\\sasch\\source\\repos\\HelloApp\\HelloApp\\HelloApp.csproj",
+      "projectPath": "C:\\Users\\sasch\\source\\repos\\aspNet\\HelloApp\\HelloApp.csproj",
       "packagesPath": "C:\\Users\\sasch\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\sasch\\source\\repos\\HelloApp\\HelloApp\\obj\\",
+      "outputPath": "C:\\Users\\sasch\\source\\repos\\aspNet\\HelloApp\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Microsoft\\Xamarin\\NuGet\\",

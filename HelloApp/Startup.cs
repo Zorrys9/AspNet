@@ -21,19 +21,41 @@ namespace HelloApp
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app)
         {
-            int x = 2;
-            app.Use(async (context, next) =>
+            app.MapWhen(context =>
             {
-                x = x * 2;
-                await next.Invoke();
-                x = x * 2;
-                await context.Response.WriteAsync($"Result: {x}");
+                return context.Request.Query.ContainsKey("id") &&
+                       context.Request.Query["id"] == "5";
+            }, HandleId);
+            app.Map("/home", home =>
+            {
+                home.Map("/index", Index);
+                home.Map("/about", About);
             });
-
+           
             app.Run(async (context) =>
             {
-                x = x * 2;
-                await Task.FromResult(0);
+                await context.Response.WriteAsync("Page Not Found");
+            });
+        }
+        private static void HandleId(IApplicationBuilder app)
+        {
+            app.Run(async context =>
+            {
+                await context.Response.WriteAsync($"id is equal to 5");
+            });
+        }
+        private static void Index(IApplicationBuilder app)
+        {
+            app.Run(async (context) =>
+            {
+                await context.Response.WriteAsync("Index");
+            });
+        }
+        private static void About(IApplicationBuilder app)
+        {
+            app.Run(async (context) =>
+            {
+                await context.Response.WriteAsync("About");
             });
         }
     }
