@@ -34,3 +34,4 @@ C:\Users\sasch\source\repos\aspNet\HelloApp\obj\Debug\netcoreapp3.1\HelloApp.Ass
 C:\Users\sasch\source\repos\aspNet\HelloApp\obj\Debug\netcoreapp3.1\HelloApp.RazorTargetAssemblyInfo.cache
 C:\Users\sasch\source\repos\aspNet\HelloApp\obj\Debug\netcoreapp3.1\HelloApp.dll
 C:\Users\sasch\source\repos\aspNet\HelloApp\obj\Debug\netcoreapp3.1\HelloApp.pdb
+C:\Users\sasch\source\repos\aspNet\HelloApp\bin\Debug\netcoreapp3.1\web.config

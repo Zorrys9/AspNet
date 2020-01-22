@@ -22,46 +22,44 @@ namespace HelloApp
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
-            //DefaultFilesOptions options = new DefaultFilesOptions();
-            //options.DefaultFileNames.Clear();
-            //options.DefaultFileNames.Add("StartPage.html");
-
-            //app.UseDirectoryBrowser(new DirectoryBrowserOptions()
+            //env.EnvironmentName = "Production";
+            if (env.IsDevelopment())
+            {
+                app.UseDeveloperExceptionPage();
+            }
+            //else
             //{
-            //    FileProvider = new PhysicalFileProvider(Path.Combine(Directory.GetCurrentDirectory(),@"wwwroot\html")),
-            //    RequestPath = new PathString("/pages")
-            //});
-            //app.UseDefaultFiles(options);
+            //    app.UseExceptionHandler("/error");
+            //}
 
 
-
-
-            //app.UseStaticFiles();
-            //app.UseStaticFiles(new StaticFileOptions()
+            //app.Map("/error", ap => ap.Run(async (context) =>
+            //await context.Response.WriteAsync("DivideByZeroException occured")));
+            //app.Run(async (context) =>
             //{
-            //    FileProvider = new PhysicalFileProvider(
-            //        Path.Combine(Directory.GetCurrentDirectory(), @"wwwroot\html")),
-            //    RequestPath = new PathString("/pages")
+            //    int x = 0;
+            //    int y = 8 / x;
+            //    await context.Response.WriteAsync($"Result = {y}");
             //});
 
 
+            //app.UseStatusCodePagesWithReExecute("/error", "?code={0}");
+            //app.Map("/error", ap => ap.Run(async (context) =>
+            //{
+            //    await context.Response.WriteAsync($"Error: {context.Request.Query["code"]}");
+            //}));
 
 
-            app.UseFileServer();
-            app.UseFileServer(new FileServerOptions
-            {
-                EnableDirectoryBrowsing = true,
-                FileProvider = new PhysicalFileProvider(
-                    Path.Combine(Directory.GetCurrentDirectory(), @"wwwroot\html")),
-                RequestPath = new PathString("/pages"),
-                EnableDefaultFiles = false
-            });
+            //app.Map("/hello", ap => ap.Run(async (context) =>
+            //{
+            //   await context.Response.WriteAsync($"Hello ASP.NET Core");
+            //}));
 
-            app.Run(async (context) =>
-            {
-                await context.Response.WriteAsync("Hello World");
-            });
 
+            app.Map("/hello", ap => ap.Run(async (context) =>
+             {
+                 await context.Response.WriteAsync($"Hello ASP.NET Core");
+             }));
         }
     }
 }
