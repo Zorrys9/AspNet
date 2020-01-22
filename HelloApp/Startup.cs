@@ -6,8 +6,9 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.FileProviders;
 using Microsoft.Extensions.Hosting;
-
+using System.IO;
 namespace HelloApp
 {
     public class Startup
@@ -21,21 +22,41 @@ namespace HelloApp
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
-            //app.Run(async (context) =>
+            //DefaultFilesOptions options = new DefaultFilesOptions();
+            //options.DefaultFileNames.Clear();
+            //options.DefaultFileNames.Add("StartPage.html");
+
+            //app.UseDirectoryBrowser(new DirectoryBrowserOptions()
             //{
-            //    context.Response.Headers["Content-Type"] = "text/html; charset=utf-8";
-            //    if (env.IsEnvironment("Test"))
-            //    {
-            //        await context.Response.WriteAsync("Проект в состоянии тестирования");
-            //    }
-            //    else
-            //    {
-            //        await context.Response.WriteAsync("Проект в процессе разработки или в производстве");
-            //    }
+            //    FileProvider = new PhysicalFileProvider(Path.Combine(Directory.GetCurrentDirectory(),@"wwwroot\html")),
+            //    RequestPath = new PathString("/pages")
+            //});
+            //app.UseDefaultFiles(options);
+
+
+
+
+            //app.UseStaticFiles();
+            //app.UseStaticFiles(new StaticFileOptions()
+            //{
+            //    FileProvider = new PhysicalFileProvider(
+            //        Path.Combine(Directory.GetCurrentDirectory(), @"wwwroot\html")),
+            //    RequestPath = new PathString("/pages")
             //});
 
 
-            app.UseStaticFiles();
+
+
+            app.UseFileServer();
+            app.UseFileServer(new FileServerOptions
+            {
+                EnableDirectoryBrowsing = true,
+                FileProvider = new PhysicalFileProvider(
+                    Path.Combine(Directory.GetCurrentDirectory(), @"wwwroot\html")),
+                RequestPath = new PathString("/pages"),
+                EnableDefaultFiles = false
+            });
+
             app.Run(async (context) =>
             {
                 await context.Response.WriteAsync("Hello World");
