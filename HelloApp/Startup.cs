@@ -21,12 +21,10 @@ namespace HelloApp
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app)
         {
-            app.UseToken("5555");
+            app.UseMiddleware<ErrorHandlingMiddleware>();
+            app.UseMiddleware<AuthenticationMiddleware>();
+            app.UseMiddleware<RoutingMiddleWare>();
 
-            app.Run(async (context) =>
-            {
-                await context.Response.WriteAsync("Hello World");
-            });
         }
     }
 }
