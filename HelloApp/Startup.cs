@@ -19,11 +19,27 @@ namespace HelloApp
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
-            app.UseMiddleware<ErrorHandlingMiddleware>();
-            app.UseMiddleware<AuthenticationMiddleware>();
-            app.UseMiddleware<RoutingMiddleWare>();
+            //app.Run(async (context) =>
+            //{
+            //    context.Response.Headers["Content-Type"] = "text/html; charset=utf-8";
+            //    if (env.IsEnvironment("Test"))
+            //    {
+            //        await context.Response.WriteAsync("Проект в состоянии тестирования");
+            //    }
+            //    else
+            //    {
+            //        await context.Response.WriteAsync("Проект в процессе разработки или в производстве");
+            //    }
+            //});
+
+
+            app.UseStaticFiles();
+            app.Run(async (context) =>
+            {
+                await context.Response.WriteAsync("Hello World");
+            });
 
         }
     }
